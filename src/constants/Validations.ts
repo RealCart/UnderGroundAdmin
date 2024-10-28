@@ -65,6 +65,8 @@ export const UserEditSchedule = Yup.object().shape({
         .required('Поле название занятия обязателен'),
     coach: Yup.string()
         .required('Поле тренера обязателен к выбору'),
+    branch: Yup.string()
+        .required('Поле выбора филиала обязателен к выбору'),
     data: Yup.string()
         .required('Поле даты обязаьтелен к выбору'),
     time: Yup.string()
@@ -188,36 +190,31 @@ export const AddNotificationInfoValidation = Yup.object().shape({
         .required('Поле времени отправки обязательна'),
 })
 
+const daysOfWeek = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+
 export const BranchInfoValidation = Yup.object().shape({
-    title: Yup.string()
-        .required('Поле названия обязательна'),
-    adress: Yup.string()
-        .required('Поле адресса обязательна'),
-    phoneNumber: Yup.string()
-        .min(15, 'Номер слишком короткий')
-        .max(15, 'Номер слишком короткий')
-        .required('Поле номера обязателен к заполнению'),
-    email: Yup.string()
-        .required('Поле электронной почты обязательна к заполнению')
-        .email('Некорректный email адрес'),
-    workHour: Yup.string()
-        .required('Поле режима работы обязателен к заполнению'),
-    countOfCoaches: Yup.number()
-        .required('Поле обязательна к заполнению'),
-    countOfUsers: Yup.number()
-        .required('Поле обязательна к заполнению')
-})
-
-export const daysOfWeek = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
-
-export const WorkHourValidation = Yup.object().shape(
-  daysOfWeek.reduce((schema: { [key: string]: Yup.StringSchema }, day: string) => {
-    schema[day] = Yup.string()
-      .matches(/^\d{2}:\d{2} - \d{2}:\d{2}$/, 'Введите время полностью')
-      .required(`${day} обязательно`);
-    return schema;
-  }, {})
-);
+  title: Yup.string().required('Поле названия обязательно'),
+  adress: Yup.string().required('Поле адреса обязательно'),
+  location: Yup.string().required('Поле расположения обязателен к заполнению'),
+  desc: Yup.string().required('Поле описание обязателен к заполнению'),
+  phoneNumber: Yup.string()
+    .min(15, 'Номер слишком короткий')
+    .max(15, 'Номер слишком длинный')
+    .required('Поле номера обязательно к заполнению'),
+  email: Yup.string()
+    .email('Некорректный email адрес')
+    .required('Поле электронной почты обязательно к заполнению'),
+  workHour: Yup.object().shape(
+    daysOfWeek.reduce((schema, day) => {
+        schema[day] = Yup.string()
+          .matches(/^\d{2}:\d{2}-\d{2}:\d{2}$/, 'Введите время в формате ЧЧ:ММ-ЧЧ:ММ')
+          .required(`${day} обязательно`);
+        return schema;
+      }, {} as { [key: string]: Yup.StringSchema })
+  ),
+  countOfCoaches: Yup.number().required('Поле обязательно к заполнению'),
+  countOfUsers: Yup.number().required('Поле обязательно к заполнению'),
+});
 
 export const CategoryValidation = Yup.object().shape({
     title: Yup.string()
@@ -243,10 +240,10 @@ export const StoriesInfoValidation = Yup.object().shape({
         .required('Поле название обязательна к заполнению'),
     data: Yup.string()
         .required('Поле даты обязательна к заполнению'),
-    status: Yup.string()
-        .required('Поле статуса обязательна к заполнению'),
     desc: Yup.string()
         .required('Поле описания обязателен'),
+    media: Yup.array()
+        .min(1, 'Пожалуйста, выберите хотя бы одну фотографию.'),
 })
 
 export const FrozenInfoValidation = Yup.object().shape({
@@ -258,8 +255,10 @@ export const FrozenInfoValidation = Yup.object().shape({
         .required('Поле номера телефона обязателен к заполнению'),
     data: Yup.string()
         .required('Поле даты подачи заявки обязателен к заполнению'),
-    termData: Yup.string()
-        .required('Поле периода заморозки обязателен к заполнению'),
+    termDate: Yup.object().shape({
+        startDate: Yup.string().required('Дата начала обязательна'),
+        endDate: Yup.string().required('Дата окончания обязательна'),
+    }),
     status: Yup.string()
         .required('Поле статуса обязателен к заполнению')
 })
@@ -270,8 +269,6 @@ export const SubscriptionInfoValidation = Yup.object().shape({
     price: Yup.number()
         .required('Поле cтоимости обязателен к заполнению')
         .positive('Стоимость должна быть положительным числом'),
-    type: Yup.string()
-        .required('Поле типа обязателен к заполнению'),
     term: Yup.string()
         .required('Поле продолжительности обязателен к заполнению'),
     countOfTraining: Yup.string()
@@ -281,8 +278,8 @@ export const SubscriptionInfoValidation = Yup.object().shape({
 })
 
 export const StoreProductsValidation = Yup.object().shape({
-    media: Yup.string()
-        .required('Поле медиа обязателен к заполнению'),
+    media: Yup.array()
+        .min(1, 'Пожалуйста, выберите хотя бы одну фотографию.'),
     title: Yup.string()
         .required('Поле название обязателен к заполнению'),
     price: Yup.number()

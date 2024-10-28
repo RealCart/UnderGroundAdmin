@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native'
 import { UserEditSchedule } from '@/src/constants/Validations'
 import { Formik } from 'formik'
 import { RightTurnArrow } from '../icons/Icon';
-import { TIME_OPTIONS } from '@/src/screens/data/data';
+import { BRANCH, TIME_OPTIONS } from '@/src/screens/data/data';
 import PopUp from './PopUp'
 import GradientButton from './GradientButton';
 import Snackbar from './SnackBar';
@@ -16,13 +16,14 @@ import { scale } from 'react-native-size-matters';
 interface CoachEditWorkOutModelProps {
     typeOfTraining:string,
     coach:string,
+    branch:string,
     data:string,
     time:string,
     modalVisible:boolean,
     setModalVisible: (visible: Boolean) => void,
 }
 
-const CoachEditWorkOutModel:React.FC<CoachEditWorkOutModelProps> = ({typeOfTraining, coach, data, time, modalVisible, setModalVisible}) => {
+const CoachEditWorkOutModel:React.FC<CoachEditWorkOutModelProps> = ({typeOfTraining, coach, branch, data, time, modalVisible, setModalVisible}) => {
     const [snackbarVisible, setSnackbarVisible] = useState(false);
     const textColor = useThemeColor({ light: '#000000', dark: '#FFFFFF' }, 'text');
     return (
@@ -32,6 +33,7 @@ const CoachEditWorkOutModel:React.FC<CoachEditWorkOutModelProps> = ({typeOfTrain
                 initialValues={{
                     class: typeOfTraining,
                     coach: coach,
+                    branch: branch,
                     data:data,
                     time:time,
                 }}
@@ -57,6 +59,11 @@ const CoachEditWorkOutModel:React.FC<CoachEditWorkOutModelProps> = ({typeOfTrain
                         {touched.class && errors.class && <Text style={styles.error}>{errors.class}</Text>}
                         <InfoFormInput title='Тренер' placeholder='Введите ФИО тренера' value={values.coach} onChangeText={handleChange('coach')}/>
                         {touched.coach && errors.coach && <Text style={styles.error}>{errors.coach}</Text>}
+                        <View>
+                            <Text style={styles.ttl}>Филиал</Text>
+                            <DropdownList options={BRANCH} selectedOption={values.branch} onChange={handleChange('branch')}/> 
+                            {touched.branch && errors.branch && <Text style={styles.error}>{errors.branch}</Text>}
+                        </View>
                         <View>
                             <Text style={styles.ttl}>Дата</Text>
                             <DatePickerModal initialDate={values.data} onDateChange={handleChange('data')}/>

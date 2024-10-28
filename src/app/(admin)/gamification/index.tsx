@@ -19,6 +19,10 @@ const GamificationScreen = () => {
     router.push({ pathname: `/gamification/addGamification`, params: {} });
   }
 
+  const deleteModal = () => {
+    
+  }
+
   return (
     <ThemedMainView>
       <PageHeader title='Список активных программ'/>
@@ -46,7 +50,7 @@ const GamificationScreen = () => {
         />
         <GradientButton title="+ Добавить тренировку" toDo={addWorkOut} />
       </View>
-      <DeleteModel modalVisible={isDeleteModalVisible} setModalVisible={()=>setDeleteModalVisible(false)}/>
+      <DeleteModel modalVisible={isDeleteModalVisible} deleteGradient={deleteModal} setModalVisible={()=>setDeleteModalVisible(false)}/>
     </ThemedMainView>
   );
 };

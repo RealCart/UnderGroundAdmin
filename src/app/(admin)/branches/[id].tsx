@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import { BranchInfoValidation } from '@/src/constants/Validations';
 import { PageHeader } from '@/src/components/PageHeader';
 import { getBranchById } from '@/src/api/Api';
+import MultilineInput from '@/src/components/admin/MultilineInput';
 import ThemedMainView from '@/src/components/themedComponents/ThemedMainView';
 import WorkHours from '@/src/components/admin/WorkHours';
 import InfoFormInput from '@/src/components/admin/InfoFormInput';
@@ -15,146 +16,192 @@ import PhoneNumberInput from '@/src/components/admin/PhoneNumberInput';
 import GradientButton from '@/src/components/admin/GradientButton';
 
 interface BranchesInfo {
-    id: number; 
-    title:string,
-    adress:string,
-    phoneNumber:string,
-    email:string,
-    countOfCoaches:number,
-    countOfUsers:number,
-    load:string,
+  id: number; 
+  title: string;
+  adress: string;
+  location: string;
+  desc: string;
+  phoneNumber: string;
+  email: string;
+  countOfCoaches: number;
+  countOfUsers: number;
+  load: string;
+  workHour: {
+    [key: string]: string;
+  };
+}
+
+interface FormValues {
+  title: string;
+  adress: string;
+  phoneNumber: string;
+  location: string;
+  desc: string;
+  email: string;
+  workHour: {
+    [key: string]: string;
+  };
+  countOfCoaches: string;
+  countOfUsers: string;
 }
 
 function EditBranch() {
-    const backgroundColor = useThemeColor({ light: '#FFFFFF', dark: '#181818' }, 'background'); 
-    const textColor = useThemeColor({ light: '#000000', dark: '#FFFFFF' }, 'text');
-    const { id } = useLocalSearchParams();
-    const BranchdId = Number(id);
-    const [branch, setBranch] = useState<BranchesInfo | null>(null);
-    const [loading, setLoading] = useState(true);
+  const backgroundColor = useThemeColor({ light: '#FFFFFF', dark: '#181818' }, 'background'); 
+  const textColor = useThemeColor({ light: '#000000', dark: '#FFFFFF' }, 'text');
+  const { id } = useLocalSearchParams();
+  const BranchdId = Number(id);
+  const [branch, setBranch] = useState<BranchesInfo | null>(null);
+  const [loading, setLoading] = useState(true);
 
-    const [title, setTitle] = useState('');
-    const [adress, setAdress] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [countOfCoaches, setCountOfCoaches] = useState('');
-    const [countOfUsers, setCountOfUsers] = useState('');
-    const [load, setLoad] = useState('');
+  const [title, setTitle] = useState('');
+  const [adress, setAdress] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [location, setLocation] = useState('');
+  const [desc, setDesc] = useState('');
+  const [countOfCoaches, setCountOfCoaches] = useState('');
+  const [countOfUsers, setCountOfUsers] = useState('');
+  const [load, setLoad] = useState('');
+  const [workHour, setWorkHour] = useState<{ [key: string]: string }>({});
 
-    useEffect(() => {
-        const fetchBranch = async () => {
-            setLoading(true); 
-            try {
-                const fetchedBranch = await getBranchById(BranchdId);
-                if (fetchedBranch) {
-                    setBranch(fetchedBranch); 
-                    setTitle(fetchedBranch.title)
-                    setAdress(fetchedBranch.adress)
-                    setPhoneNumber(fetchedBranch.phoneNumber)
-                    setEmail(fetchedBranch.email)
-                    setCountOfCoaches(fetchedBranch.countOfCoaches.toString())
-                    setCountOfUsers(fetchedBranch.countOfUsers.toString())
-                    setLoad(fetchedBranch.load)
-                } else {
-                    setBranch(null);
-                }
-            } catch (error) {
-                console.error('Error fetching branch:', error);
-                setBranch(null); 
-            } finally {
-                setLoading(false); 
-            }
-        };
+  useEffect(() => {
+    const fetchBranch = async () => {
+      setLoading(true); 
+      try {
+        const fetchedBranch = await getBranchById(BranchdId);
+        if (fetchedBranch) {
+          setBranch(fetchedBranch); 
+          setTitle(fetchedBranch.title);
+          setAdress(fetchedBranch.adress);
+          setLocation(fetchedBranch.location);
+          setDesc(fetchedBranch.desc);
+          setPhoneNumber(fetchedBranch.phoneNumber);
+          setEmail(fetchedBranch.email);
+          setCountOfCoaches(fetchedBranch.countOfCoaches.toString());
+          setCountOfUsers(fetchedBranch.countOfUsers.toString());
+          setLoad(fetchedBranch.load);
+          setWorkHour(fetchedBranch.workHour);
+        } else {
+          setBranch(null);
+        }
+      } catch (error) {
+        console.error('Error fetching branch:', error);
+        setBranch(null); 
+      } finally {
+        setLoading(false); 
+      }
+    };
 
-        fetchBranch();
-    }, [BranchdId]);
+    fetchBranch();
+  }, [BranchdId]);
 
-    if (loading) {
-        return <ActivityIndicator size="large" color="#0000ff" />;
-    }
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
 
-    if (!branch) {
-        return <Text style={{ color: textColor }}>Workout not found</Text>;
-    }
+  if (!branch) {
+    return <Text style={{ color: textColor }}>Branch not found</Text>;
+  }
 
-    return (
-        <Formik 
-        initialValues={{
-            title: title,
-            adress: adress,
-            phoneNumber:  phoneNumber,
-            email:  email,
-            countOfCoaches: countOfCoaches,
-            countOfUsers: countOfUsers,
-          }}
-          validationSchema={BranchInfoValidation}
-          onSubmit={(values) => {
-                console.log(values)
-                Alert.alert(JSON.stringify(values))
-          }}
-        >
-            {({ handleChange, handleSubmit, values, errors, touched }) => (
-                <ThemedMainView style={{flex:1}}>
-                <PageHeader title={values.title}/>
-                <ScrollView style={[styles.container, { backgroundColor }]}>
-                    <View>
-                        <View style={styles.section}>
-                            <InfoFormInput title="Название" placeholder='Название' value={values.title} onChangeText={handleChange('title')} />
-                            {touched.title && errors.title && <Text style={styles.error}>{errors.title}</Text>}
-                        </View>
-                        <View style={styles.section}>
-                            <InfoFormInput title="Адрес" placeholder='Адрес филиала' value={values.adress} onChangeText={handleChange('adress')} />
-                            {touched.adress && errors.adress && <Text style={styles.error}>{errors.adress}</Text>}
-                        </View>
-                        <View style={styles.section}>
-                            <PhoneNumberInput value={values.phoneNumber} onChangeText={handleChange('phoneNumber')} />
-                            {touched.phoneNumber && errors.phoneNumber && <Text style={styles.error}>{errors.phoneNumber}</Text>}
-                        </View>
-                        <View style={styles.section}>
-                            <InfoFormInput title="Электронная почта" placeholder='Электронная почта' value={values.email} onChangeText={handleChange('email')} />
-                            {touched.email && errors.email && <Text style={styles.error}>{errors.email}</Text>}
-                        </View>
-                        <View>
-                            <WorkHours/>
-                        </View>
-                        <View style={styles.section}>
-                            <NotEditableInput title='Число тренеров' value={values.countOfCoaches} path='BranchCoach' branchId={BranchdId} onChangeText={handleChange('countOfCoaches')}/> 
-                            {touched.countOfCoaches && errors.countOfCoaches && <Text style={styles.error}>{errors.countOfCoaches}</Text>}
-                        </View> 
-                        <View style={styles.section}>
-                            <NotEditableInput title='Число пользователей' value={values.countOfUsers} path='BranchUsers' branchId={BranchdId} onChangeText={handleChange('countOfUsers')}/> 
-                            {touched.countOfUsers && errors.countOfUsers && <Text style={styles.error}>{errors.countOfUsers}</Text>}
-                        </View>
-                        <View style={styles.section}>
-                            <BranchLoader title='Загрузка филиала' value={`${load} от максимальной вместимости`}/> 
-                        </View>
-                        <View>
-                            <GradientButton title="Сохранить" toDo={handleSubmit} />
-                        </View>
-                    </View>
-                </ScrollView>
-                </ThemedMainView>
-            )}
-        </Formik>
-    );
+  return (
+    <Formik<FormValues>
+      initialValues={{
+        title: title,
+        adress: adress,
+        location: location,
+        desc: desc,
+        phoneNumber: phoneNumber,
+        email: email,
+        workHour: workHour, 
+        countOfCoaches: countOfCoaches,
+        countOfUsers: countOfUsers,
+      }}
+      validationSchema={BranchInfoValidation}
+      onSubmit={(values) => {
+        console.log(values);
+        Alert.alert(JSON.stringify(values));
+      }}
+    >
+      {({ handleChange, handleSubmit, values, errors, touched }) => (
+        <ThemedMainView style={{ flex:1 }}>
+          <PageHeader title={values.title} />
+          <ScrollView style={[styles.container, { backgroundColor }]}>
+            <View>
+              <View style={styles.section}>
+                <InfoFormInput title="Название" placeholder='Название' value={values.title} onChangeText={handleChange('title')} />
+                {touched.title && errors.title && <Text style={styles.error}>{errors.title}</Text>}
+              </View>
+              <View style={styles.section}>
+                <InfoFormInput title="Адрес" placeholder='Адрес филиала' value={values.adress} onChangeText={handleChange('adress')} />
+                {touched.adress && errors.adress && <Text style={styles.error}>{errors.adress}</Text>}
+              </View>
+              <View style={styles.section}>
+                  <InfoFormInput
+                    title='Расположение' 
+                    placeholder='Введите расположение' 
+                    value={values.location} 
+                    onChangeText={handleChange('location')}
+                  />
+                  {touched.location && errors.location && <Text style={styles.error}>{errors.location}</Text>}
+                </View>
+                <View style={styles.section}>
+                  <MultilineInput
+                    title='Описание филиала' 
+                    placeholder='Введите описание филиала' 
+                    value={values.desc} 
+                    onChangeText={handleChange('desc')}
+                  />
+                  {touched.desc && errors.desc && <Text style={styles.error}>{errors.desc}</Text>}
+                </View>
+              <View style={styles.section}>
+                <PhoneNumberInput value={values.phoneNumber} onChangeText={handleChange('phoneNumber')} />
+                {touched.phoneNumber && errors.phoneNumber && <Text style={styles.error}>{errors.phoneNumber}</Text>}
+              </View>
+              <View style={styles.section}>
+                <InfoFormInput title="Электронная почта" placeholder='Электронная почта' value={values.email} onChangeText={handleChange('email')} />
+                {touched.email && errors.email && <Text style={styles.error}>{errors.email}</Text>}
+              </View>
+              <View>
+                <WorkHours />
+              </View>
+              <View style={styles.section}>
+                <NotEditableInput title='Число тренеров' value={values.countOfCoaches} path='BranchCoach' branchId={BranchdId} onChangeText={handleChange('countOfCoaches')} /> 
+                {touched.countOfCoaches && errors.countOfCoaches && <Text style={styles.error}>{errors.countOfCoaches}</Text>}
+              </View> 
+              <View style={styles.section}>
+                <NotEditableInput title='Число пользователей' value={values.countOfUsers} path='BranchUsers' branchId={BranchdId} onChangeText={handleChange('countOfUsers')} /> 
+                {touched.countOfUsers && errors.countOfUsers && <Text style={styles.error}>{errors.countOfUsers}</Text>}
+              </View>
+              <View style={styles.section}>
+                <BranchLoader title='Загрузка филиала' value={`${load} от максимальной вместимости`} /> 
+              </View>
+              <View>
+                <GradientButton title="Сохранить" toDo={handleSubmit} />
+              </View>
+            </View>
+          </ScrollView>
+        </ThemedMainView>
+      )}
+    </Formik>
+  );
 }
 
 export default EditBranch;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingHorizontal: 12,
-    },
-    ttl: {
-        fontSize: 12, 
-        color: '#787878'
-    },
-    section: {
-        marginBottom:10,
-    },
-    error: {
-      color: 'red',
-      fontSize: 12,
-    },
+  container: {
+    flex: 1,
+    paddingHorizontal: 12,
+  },
+  ttl: {
+    fontSize: 12, 
+    color: '#787878'
+  },
+  section: {
+    marginBottom: 10,
+  },
+  error: {
+    color: 'red',
+    fontSize: 12,
+  },
 });

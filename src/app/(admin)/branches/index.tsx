@@ -19,6 +19,10 @@ const BranchesScreen = () => {
     router.push({ pathname: `/branches/addBranch`, params: {} });
   }
 
+  const deleteModal = () => {
+    
+  }
+
   return (
     <ThemedMainView>
       <PageHeader title='Филиалы'/>
@@ -43,7 +47,7 @@ const BranchesScreen = () => {
         />
         <GradientButton title="+ Добавить филиал" toDo={addBranch} />
       </View>
-      <DeleteModel modalVisible={isDeleteModalVisible} setModalVisible={()=>setDeleteModalVisible(false)}/>
+      <DeleteModel modalVisible={isDeleteModalVisible} deleteGradient={deleteModal} setModalVisible={()=>setDeleteModalVisible(false)}/>
     </ThemedMainView>
   );
 };

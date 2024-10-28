@@ -26,9 +26,8 @@ function AddStories() {
         initialValues={{
             title: '',
             data: new Date().toLocaleDateString(),
-            status: '',
             desc: '',
-            media: ''
+            media: [],
           }}
           validationSchema={StoriesInfoValidation}
           onSubmit={(values) => {
@@ -37,7 +36,7 @@ function AddStories() {
             setSnackbarVisible(true);
           }}
         >
-            {({ handleChange, handleSubmit, values, errors, touched}) => (
+            {({ handleChange, handleSubmit, setFieldValue, values, errors, touched}) => (
                 <ThemedMainView>
                 <PageHeader title='Добавить советы'/>
                     <ScrollView style={[styles.container, { backgroundColor }]}>
@@ -50,7 +49,11 @@ function AddStories() {
                             {touched.desc && errors.desc && <Text style={styles.error}>{errors.desc}</Text>}
                         </View>
                         <View style={styles.section}>
-                            <MediaInput title='Медиа' placeholder='Прикрепите файлы' editable={false} value={values.media} onChangeText={handleChange('media')}/>
+                            <MediaInput 
+                                title='Медиа' 
+                                value={values.media} 
+                                onImageSelect={(uris: string[]) => setFieldValue('media', uris)}
+                            />
                             {touched.media && errors.media && <Text style={styles.error}>{errors.media}</Text>}
                         </View>
                         <View style={styles.section}>

@@ -14,6 +14,9 @@ const index = () => {
     const addCategory = () => {
         router.push({ pathname: `/store/category/addCategory`, params: {} });
     }
+    const deleteModal = () => {
+        
+    }
     return (
         <ThemedMainView>
             <PageHeader title='Категории'/>
@@ -34,7 +37,7 @@ const index = () => {
                 />
                 <GradientButton title='+ Добавить категорию' toDo={addCategory}/>
             </View>
-            <DeleteModel modalVisible={isDeleteModalVisible} setModalVisible={()=>setDeleteModalVisible(false)}/>
+            <DeleteModel modalVisible={isDeleteModalVisible} deleteGradient={deleteModal} setModalVisible={()=>setDeleteModalVisible(false)}/>
         </ThemedMainView>
     )
 }

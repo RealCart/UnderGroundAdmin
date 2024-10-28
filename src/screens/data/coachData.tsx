@@ -7,7 +7,7 @@ export const coachList = [
         workoutInfo:[
             {
                 date:'01.09.2024', time:'10:00', statusOfTraining:"Посещено", 
-                typeOfTrainig:"Персональная тренировка", 
+                typeOfTrainig:"Персональная тренировка", branch: 'Филиал 2',
                 coach:"Даулет Ержанов", amountOfTime:'60 мин', 
             }
         ], 
@@ -30,12 +30,12 @@ export const coachList = [
         workoutInfo:[
             {
                 date:'01.09.2024', time:'10:00', statusOfTraining:"Посещено", 
-                typeOfTrainig:"Персональная тренировка", 
+                typeOfTrainig:"Персональная тренировка", branch: 'Филиал 4',
                 coach:"Даулет Ержанов", amountOfTime:'60 мин', 
             },
             {
                 date:'01.09.2024', time:'10:00', statusOfTraining:"Посещено", 
-                typeOfTrainig:"Персональная тренировка", 
+                typeOfTrainig:"Персональная тренировка", branch: 'Филиал 4',
                 coach:"Даулет Ержанов", amountOfTime:'60 мин', 
             }
         ], 
@@ -58,17 +58,17 @@ export const coachList = [
          workoutInfo:[
              {
                 date:'01.09.2024', time:'10:00', statusOfTraining:"Посещено", 
-                typeOfTrainig:"Персональная тренировка", 
+                typeOfTrainig:"Персональная тренировка", branch: 'Филиал 3',
                 coach:"Даулет Ержанов", amountOfTime:'60 мин', 
              },
              {
                 date:'01.09.2024', time:'10:00', statusOfTraining:"Посещено", 
-                typeOfTrainig:"Персональная тренировка", 
+                typeOfTrainig:"Персональная тренировка", branch: 'Филиал 2',
                 coach:"Даулет Ержанов", amountOfTime:'60 мин', 
              },
              {
                 date:'01.09.2024', time:'10:00', statusOfTraining:"Посещено", 
-                typeOfTrainig:"Персональная тренировка", 
+                typeOfTrainig:"Персональная тренировка", branch: 'Филиал 1',
                 coach:"Даулет Ержанов", amountOfTime:'60 мин', 
              }
          ], 
@@ -91,12 +91,12 @@ export const coachList = [
         workoutInfo:[
             {
                 date:'01.09.2024', time:'10:00', statusOfTraining:"Посещено", 
-                typeOfTrainig:"Персональная тренировка", 
+                typeOfTrainig:"Персональная тренировка", branch: 'Филиал 4',
                 coach:"Даулет Ержанов", amountOfTime:'60 мин', 
             },
             {
                 date:'01.09.2024', time:'10:00', statusOfTraining:"Посещено", 
-                typeOfTrainig:"Персональная тренировка", 
+                typeOfTrainig:"Персональная тренировка", branch: 'Филиал 2',
                 coach:"Даулет Ержанов", amountOfTime:'60 мин', 
             }
         ], 
@@ -119,17 +119,17 @@ export const coachList = [
         workoutInfo:[
             {
                 date:'01.09.2024', time:'10:00', statusOfTraining:"Посещено", 
-                typeOfTrainig:"Персональная тренировка", 
+                typeOfTrainig:"Персональная тренировка", branch: 'Филиал 3',
                 coach:"Даулет Ержанов", amountOfTime:'60 мин', 
             },
             {
                 date:'01.09.2024', time:'10:00', statusOfTraining:"Посещено", 
-                typeOfTrainig:"Персональная тренировка", 
+                typeOfTrainig:"Персональная тренировка", branch: 'Филиал 2',
                 coach:"Даулет Ержанов", amountOfTime:'60 мин', 
             },
             {
                 date:'01.09.2024', time:'10:00', statusOfTraining:"Посещено", 
-                typeOfTrainig:"Персональная тренировка", 
+                typeOfTrainig:"Персональная тренировка", branch: 'Филиал 1',
                 coach:"Даулет Ержанов", amountOfTime:'60 мин', 
             }
         ], 

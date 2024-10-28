@@ -209,7 +209,9 @@ export const BRANCHES = [
     {
         id:0, adress:'Underground на Сейфуллина, 1', title:'Underground на Сейфуллина, 1',
         countOfCoaches: 15, countOfUsers:69, status:'Активен', phoneNumber:'(708) 000 00 00',
-        email:'underground@fitnessclub.kz', load:'30%', 
+        email:'underground@fitnessclub.kz', load:'30%', location:'51.123178830008385, 71.43444633940535', desc:"dawdawdawdawda",
+        workHour: {"Воскресенье": "11:11-11:11", "Вторник": "11:11-11:11", "Понедельник": "11:11-11:11", 
+                    "Пятница": "11:11-11:11", "Среда": "11:11-11:11", "Суббота": "11:11-11:11", "Четверг": "11:11-11:11"},
         coaches: [
             {   id:0, Avatar:'', firstname:'Алина', lastname:"А.", phoneNumber:"(708) 445 55 55", date:'5.09.1996',
                 email:'AlinaA@mail.ru', gender:"Мужской", status:'Активный', exp:'9', 
@@ -505,8 +507,9 @@ export const BRANCHES = [
     },
     {
         id:1, adress:'Underground на Сейфуллина, 1', title:'Underground на Майами бичь, 1',
-        countOfCoaches: 15, countOfUsers:69, status:'Активен', phoneNumber:'(708) 000 00 00',
-        email:'underground@fitnessclub.kz', load:'50%',
+        countOfCoaches: 15, countOfUsers:69, status:'Активен', phoneNumber:'(708) 000 00 00', location:'24234234', desc:"dawdawdawdawda",
+        email:'underground@fitnessclub.kz', load:'50%', workHour: {"Воскресенье": "11:11-11:11", "Вторник": "11:11-11:11", "Понедельник": "11:11-11:11", 
+            "Пятница": "11:11-11:11", "Среда": "11:11-11:11", "Суббота": "11:11-11:11", "Четверг": "11:11-11:11"},
         coaches: [
             {   id:0, Avatar:'', firstname:'Алина', lastname:"А.", phoneNumber:"(708) 445 55 55", date:'5.09.1996',
                 email:'AlinaA@mail.ru', gender:"Мужской", status:'Активный', exp:'9', 
@@ -801,9 +804,10 @@ export const BRANCHES = [
         ]
     },
     {
-        id:2, adress:'Underground на Сейфуллина, 1', title:'Underground на Париже, 1',
+        id:2, adress:'Underground на Сейфуллина, 1', title:'Underground на Париже, 1', location:'24234234', desc:"dawdawdawdawda",
         countOfCoaches: 15, countOfUsers:69, status:'Активен', phoneNumber:'(708) 000 00 00',
-        email:'underground@fitnessclub.kz', load:'20%',
+        email:'underground@fitnessclub.kz', load:'20%', workHour: {"Воскресенье": "11:11-11:11", "Вторник": "11:11-11:11", "Понедельник": "11:11-11:11", 
+            "Пятница": "11:11-11:11", "Среда": "11:11-11:11", "Суббота": "11:11-11:11", "Четверг": "11:11-11:11"},
         coaches: [
             {   id:0, Avatar:'', firstname:'Алина', lastname:"А.", phoneNumber:"(708) 445 55 55", date:'5.09.1996',
                 email:'AlinaA@mail.ru', gender:"Мужской", status:'Активный', exp:'9', 
@@ -1099,8 +1103,9 @@ export const BRANCHES = [
     },
     {
         id:3, adress:'Underground на Сейфуллина, 1', title:'Underground на Столах, 1',
-        countOfCoaches: 15, countOfUsers:69, status:'Активен', phoneNumber:'(708) 000 00 00',
-        email:'underground@fitnessclub.kz', load:'10%',
+        countOfCoaches: 15, countOfUsers:69, status:'Активен', phoneNumber:'(708) 000 00 00', location:'24234234', desc:"dawdawdawdawda",
+        email:'underground@fitnessclub.kz', load:'10%', workHour: {"Воскресенье": "11:11-11:11", "Вторник": "11:11-11:11", "Понедельник": "11:11-11:11", 
+            "Пятница": "11:11-11:11", "Среда": "11:11-11:11", "Суббота": "11:11-11:11", "Четверг": "11:11-11:11"},
         coaches: [
             {   id:0, Avatar:'', firstname:'Алина', lastname:"А.", phoneNumber:"(708) 445 55 55", date:'5.09.1996',
                 email:'AlinaA@mail.ru', gender:"Мужской", status:'Активный', exp:'9', 
@@ -1429,48 +1434,48 @@ export const OPTIONSPRIZE = [
 export const STORIES = [
     {id: 0, title: 'Пейте больше воды', dataStart:'01.09.2024', status:'Активно',
         desc:'Регулярное питье воды улучшает обмен веществ и помогает восстанавливаться после тренировок',
-        media:'porno.mp3'
+        media:[]
     },
     {id: 1, title: 'Хавай меньше', dataStart:'01.09.2024', status:'Не активно',
         desc:'Регулярное питье воды улучшает обмен веществ и помогает восстанавливаться после тренировок',
-        media:'porno.mp3'
+        media:[]
     },
     {id: 2, title: 'Думай больше', dataStart:'01.09.2024', status:'Не активно',
         desc:'Регулярное питье воды улучшает обмен веществ и помогает восстанавливаться после тренировок',
-        media:'porno.mp3'
+        media:[]
     },
-    {id: 3, title: 'Заебал иди нахуй', dataStart:'01.09.2024', status:'Активно',
+    {id: 3, title: 'Думай больше', dataStart:'01.09.2024', status:'Активно',
         desc:'Регулярное питье воды улучшает обмен веществ и помогает восстанавливаться после тренировок',
-        media:'porno.mp3'
+        media:[]
     },
 ]
 
 export const FROZEN = [
     {
-        id:0, name:'Иван Петров', data:'01.09.2024', 
-        reason:'Отпуск', status:'Ожидает', phone:'+7 (708) 455 55 55', term:'2 недели', termData:'01.09.2024 - 15.09.2024',
+        id:0, name:'Иван Петров', data:'01.09.2024',  termDate:{startDate:'01.05.2001', endDate:'01.05.2021'},
+        reason:'Отпуск', status:'Ожидает', phone:'+7 (708) 455 55 55', term:'2 недели',
     },
     {
-        id:1, name:'Иван Петров', data:'01.09.2024', 
-        reason:'Отпуск', status:'Принята', phone:'+7 (708) 455 55 55', term:'2 недели', termData:'01.09.2024 - 15.09.2024',
+        id:1, name:'Иван Петров', data:'01.09.2024', termDate:{startDate:'01.05.2001', endDate:'01.05.2021'},
+        reason:'Отпуск', status:'Принята', phone:'+7 (708) 455 55 55', term:'2 недели'
     },
     {
-        id:2, name:'Иван Петров', data:'01.09.2024', 
-        reason:'Отпуск', status:'Ожидает', phone:'+7 (708) 455 55 55', term:'2 недели', termData:'01.09.2024 - 15.09.2024',
+        id:2, name:'Иван Петров', data:'01.09.2024', termDate:{startDate:'01.05.2001', endDate:'01.05.2021'},
+        reason:'Отпуск', status:'Ожидает', phone:'+7 (708) 455 55 55', term:'2 недели'
     },
 ]
 
 export const SUBSCRIPTION = [
     {
-        id:0, title:'Абонемент 1 месяц', price:'15000', type:'Персональный', 
+        id:0, title:'Абонемент 1 месяц', price:'15000',
         term:'1', countOfTraining:'12', include:'Сауна, тренер, бассейн'
     },
     {
-        id:1, title:'Абонемент 3 месяца', price:'60000', type:'Групповой', 
+        id:1, title:'Абонемент 3 месяца', price:'60000', 
         term:'3', countOfTraining:'36', include:'Сауна, тренер, бассейн'
     },
     {
-        id:2, title:'Абонемент 1 месяц', price:'15000', type:'Персональный', 
+        id:2, title:'Абонемент 1 месяц', price:'15000',
         term:'1', countOfTraining:'12', include:'Сауна, тренер, бассейн'
     },
 ]
@@ -1497,15 +1502,15 @@ export const CLASSESCATEGORY = [
 
 export const PRODUCTS = [
     {
-        id: 0, title:'Футболка', price:'667', discountPrice:'1.000.000', count:'120', media:'porno4K.video',
+        id: 0, title:'Футболка', price:'667', discountPrice:'1.000.000', count:'120', media:[],
         color:'#243355; #565435', size:'48; 52', character:['апапва'], desc:''
     },
     {
-        id: 1, title:'Кросовки', price:'557', discountPrice:'1.000.000', count:'120', media:'porno4K.video',
+        id: 1, title:'Кросовки', price:'557', discountPrice:'1.000.000', count:'120', media:[],
         color:'#243355; #565435', size:'48; 52', character:['апапва'], desc:''
     },
     {
-        id: 2, title:'Танк Т34', price:'1', discountPrice:'-1.000.000', count:'120', media:'porno4K.video',
+        id: 2, title:'Танк Т34', price:'1', discountPrice:'-1.000.000', count:'120', media:[],
         color:'#243355; #565435', size:'48; 52', character:['апапва'], desc:''
     },
 ]

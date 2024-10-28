@@ -122,7 +122,7 @@ function EditPayments() {
                         {touched.service && errors.service && <Text style={styles.error}>{errors.service}</Text>}
                     </View>
                     <View style={styles.section}>
-                        <InfoFormInput placeholder='Сумма платежа' title='Сумма' value={values.amountOf} onChangeText={handleChange('amountOf')}/>
+                        <InfoFormInput placeholder='Сумма платежа' title='Сумма' value={values.amountOf} onChangeText={handleChange('amountOf')} keyboardType='numeric'/>
                         {touched.amountOf && errors.amountOf && <Text style={styles.error}>{errors.amountOf}</Text>}
                     </View>
                     <View style={styles.section}>

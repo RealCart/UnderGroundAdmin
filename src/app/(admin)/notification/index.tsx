@@ -18,6 +18,10 @@ const NotificationScreen = () => {
   const addWorkOut = () => {
     router.push({ pathname: `/notification/addNotification`, params: {} });
   }
+  
+  const deleteModal = () => {
+
+  }
 
   return (
     <ThemedMainView>
@@ -45,7 +49,7 @@ const NotificationScreen = () => {
         />
         <GradientButton title="+ Добавить тренировку" toDo={addWorkOut} />
       </View>
-      <DeleteModel modalVisible={isDeleteModalVisible} setModalVisible={()=>setDeleteModalVisible(false)}/>
+      <DeleteModel modalVisible={isDeleteModalVisible} deleteGradient={deleteModal} setModalVisible={()=>setDeleteModalVisible(false)}/>
     </ThemedMainView>
   );
 };

@@ -17,9 +17,13 @@ const GroupScreen = () => {
     const addStoreProducts = () => {
         router.push({pathname: '/classes/group/addGroup', params: {}})
     }
+
+    const deleteModal = () => {
+
+    }
     return (
         <ThemedMainView>
-            <PageHeader title='Список персональных занятий'/>
+            <PageHeader title='Список групповых занятий'/>
             <View style={{paddingHorizontal:12}}>
                 <View style={{marginBottom:10}}>
                     <InputSearch/>
@@ -37,7 +41,7 @@ const GroupScreen = () => {
                             status={item.status}
                             coach={item.coachName}
                             price={`${item.price}₸`}
-                            payedBy={`участники(10${item.participants})`}
+                            payedBy={`участники(10/${item.participants})`}
                             branch={item.schedule}
                             deleteBtn={true}
                             onDeletePress={() => setDeleteModalVisible(true)}
@@ -46,8 +50,7 @@ const GroupScreen = () => {
                 />
                 <GradientButton title='+ Добавить занятие' toDo={addStoreProducts}/>
             </View>
-            <DeleteModel modalVisible={isDeleteModalVisible} setModalVisible={()=>setDeleteModalVisible(false)}/>
-            <CompleteModal modalVisible={isCompleteModalVisible} setModalVisible={()=>setCompleteModalVisible(false)}/>
+            <DeleteModel modalVisible={isDeleteModalVisible} deleteGradient={deleteModal} setModalVisible={()=>setDeleteModalVisible(false)}/>
         </ThemedMainView>
     )
 }

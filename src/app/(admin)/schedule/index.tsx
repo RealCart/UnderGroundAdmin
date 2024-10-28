@@ -19,6 +19,10 @@ const ScheduleScreen = () => {
     router.push({ pathname: `/schedule/addWorkOut`, params: {} });
   }
 
+  const cancelModal = () => {
+
+  }
+
   return (
     <ThemedMainView>
       <PageHeader title='Расписание'/>
@@ -47,7 +51,7 @@ const ScheduleScreen = () => {
           )}
         />
         <GradientButton title="+ Добавить тренировку" toDo={addWorkOut} />
-        <CancelModel modalVisible={isCancelModalVisible} setModalVisible={()=>setCancelModalVisible(false)}/>
+        <CancelModel modalVisible={isCancelModalVisible} cancelGradient={cancelModal} setModalVisible={()=>setCancelModalVisible(false)}/>
       </View>
     </ThemedMainView>
   );

@@ -14,6 +14,10 @@ const index = () => {
     const addStoreProducts = () => {
         router.push({pathname: '/store/products/addProducts', params: {}})
     }
+
+    const deleteModal = () => {
+        
+    }
     return (
         <ThemedMainView>
             <PageHeader title='Товар'/>
@@ -37,7 +41,7 @@ const index = () => {
                 />
                 <GradientButton title='+ Добавить товар' toDo={addStoreProducts}/>
             </View>
-            <DeleteModel modalVisible={isDeleteModalVisible} setModalVisible={()=>setDeleteModalVisible(false)}/>
+            <DeleteModel modalVisible={isDeleteModalVisible} deleteGradient={deleteModal} setModalVisible={()=>setDeleteModalVisible(false)}/>
         </ThemedMainView>
     )
 }

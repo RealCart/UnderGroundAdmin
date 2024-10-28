@@ -16,7 +16,6 @@ interface SubscriptionInfo {
     id: number,
     title:string,
     price:string,
-    type:string,
     term:string,
     countOfTraining:string, 
     include:string,
@@ -32,7 +31,6 @@ function EditSubscription() {
 
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
-    const [type, setType] = useState('');
     const [term, setTerm] = useState('');
     const [countOfTraining, setCountOfTraining] = useState('');
     const [include, setInclude] = useState('');
@@ -51,7 +49,6 @@ function EditSubscription() {
                     setSubscription(fetchedSubscription); 
                     setTitle(fetchedSubscription.title);
                     setPrice(fetchedSubscription.price);
-                    setType(fetchedSubscription.type);
                     setTerm(fetchedSubscription.term);
                     setCountOfTraining(fetchedSubscription.countOfTraining);
                     setInclude(fetchedSubscription.include);
@@ -86,7 +83,6 @@ function EditSubscription() {
         initialValues={{
             title: title,
             price: price,
-            type: type,
             term:term,
             countOfTraining: countOfTraining,
             include: include,
@@ -114,11 +110,6 @@ function EditSubscription() {
                     <View style={styles.section}>
                         <InfoFormInput title='Количество тренировок' placeholder='Заполните количество тренировок' value={values.countOfTraining} onChangeText={handleChange('countOfTraining')}/>
                         {touched.countOfTraining && errors.countOfTraining && <Text style={styles.error}>{errors.countOfTraining}</Text>}
-                    </View>
-                    <View style={styles.section}>
-                        <Text style={styles.ttl}>Тип</Text>
-                        <Dropdown options={OPTIONSTYPE} selectedOption={values.term} onChange={handleChange('type')}/>
-                        {touched.type && errors.type && <Text style={styles.error}>{errors.type}</Text>}
                     </View>
                     <View style={styles.section}>
                         <Text style={styles.ttl}>Дополнительно</Text>

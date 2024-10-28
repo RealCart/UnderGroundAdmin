@@ -54,7 +54,7 @@ const addWorkOutForm = () => {
                 <Dropdown options={TYPEOFSUBS} selectedOption={values.service} onChange={(handleChange('service'))} placeholder=' '/>
                 {touched.service && errors.service && <Text style={styles.error}>{errors.service}</Text>}
             </View>
-            <InfoFormInput title='Сумма' placeholder='Сумма платежа' value={values.amountOf} onChangeText={handleChange('amountOf')}/>
+            <InfoFormInput title='Сумма' placeholder='Сумма платежа' value={values.amountOf} onChangeText={handleChange('amountOf')} keyboardType='numeric'/>
             {touched.amountOf && errors.amountOf && <Text style={styles.error}>{errors.amountOf}</Text>}
             <View>
                 <Text style={styles.ttl}>Статус</Text>

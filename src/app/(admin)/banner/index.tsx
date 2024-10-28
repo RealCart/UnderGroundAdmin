@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { MediaScreenValidation } from '@/src/constants/Validations';
 import GradientButton from '@/src/components/admin/GradientButton';
+import { scale } from 'react-native-size-matters';
 
 const BannerScreen = () => {
     const [snackbarVisible, setSnackbarVisible] = useState(false);
@@ -37,7 +38,9 @@ const BannerScreen = () => {
               {touched.images && errors.images && (
                 <Text style={styles.error}>{errors.images}</Text>
               )}
-              <GradientButton title="Сохранить" toDo={handleSubmit} />
+              <View style={{marginTop:scale(10)}}>
+                <GradientButton title="Сохранить" toDo={handleSubmit} />
+              </View>
             </View>
           )}
         </Formik>

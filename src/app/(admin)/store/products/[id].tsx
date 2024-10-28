@@ -20,7 +20,7 @@ interface StoreProductsInfo {
     price:string,
     discountPrice:string, 
     count:string, 
-    media:string,
+    media:string[],
     color:string, 
     size:string, 
     character:string[], 
@@ -39,7 +39,7 @@ function EditStoreProducts() {
     const [price, setPrice] = useState('');
     const [discountPrice, setDiscountPrice] = useState('');
     const [count, setCount] = useState('');
-    const [media, setMedia] = useState('');
+    const [media, setMedia] = useState(['']);
     const [color, setColor] = useState('');
     const [size, setSize] = useState('');
     const [character, setCharacter] = useState(['']);
@@ -113,7 +113,11 @@ function EditStoreProducts() {
                 <PageHeader title='Добавить товар'/>
                 <ScrollView style={[styles.container, { backgroundColor }]}>
                     <View style={styles.section}>
-                        <MediaInput title='Медиа' placeholder='' value={values.media} onChangeText={handleChange('media')}/>
+                        <MediaInput 
+                            title='Медиа' 
+                            value={values.media} 
+                            onImageSelect={(uris: string[]) => setFieldValue('media', uris)} 
+                        />
                         {touched.media && errors.media && <Text style={styles.error}>{errors.media}</Text>}
                     </View>
                     <View style={styles.section}>

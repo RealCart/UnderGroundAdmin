@@ -19,7 +19,6 @@ function addSubscription() {
         initialValues={{
             title: '',
             price: '',
-            type: '',
             term:'',
             countOfTraining:'',
             include: '',
@@ -46,11 +45,6 @@ function addSubscription() {
                     <View style={styles.section}>
                         <InfoFormInput title='Количество тренировок' placeholder='Заполните количество тренировок' value={values.countOfTraining} onChangeText={handleChange('countOfTraining')}/>
                         {touched.countOfTraining && errors.countOfTraining && <Text style={styles.error}>{errors.countOfTraining}</Text>}
-                    </View>
-                    <View style={styles.section}>
-                        <Text style={styles.ttl}>Тип</Text>
-                        <Dropdown options={OPTIONSTYPE} selectedOption={values.term} placeholder='Выберите тип' onChange={handleChange('type')}/>
-                        {touched.type && errors.type && <Text style={styles.error}>{errors.type}</Text>}
                     </View>
                     <View style={styles.section}>
                         <Text style={styles.ttl}>Дополнительно</Text>

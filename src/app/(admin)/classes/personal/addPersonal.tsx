@@ -25,7 +25,7 @@ function addClassesPersonal() {
             initialValues={{
                 title: '',
                 coach: '',
-                data: '',
+                data: new Date().toLocaleDateString(),
                 time: '',
                 branch: '',
                 price: 0,

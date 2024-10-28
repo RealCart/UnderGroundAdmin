@@ -17,6 +17,14 @@ const PetsonalScreen = () => {
     const addStoreProducts = () => {
         router.push({pathname: '/classes/personal/addPersonal', params: {}})
     }
+
+    const deleteModal = () => {
+
+    }
+
+    const completeModal = () => {
+
+    }
     return (
         <ThemedMainView>
             <PageHeader title='Список персональных занятий'/>
@@ -48,8 +56,8 @@ const PetsonalScreen = () => {
                 />
                 <GradientButton title='+ Добавить товар' toDo={addStoreProducts}/>
             </View>
-            <DeleteModel modalVisible={isDeleteModalVisible} setModalVisible={()=>setDeleteModalVisible(false)}/>
-            <CompleteModal modalVisible={isCompleteModalVisible} setModalVisible={()=>setCompleteModalVisible(false)}/>
+            <DeleteModel modalVisible={isDeleteModalVisible} deleteGradient={deleteModal} setModalVisible={()=>setDeleteModalVisible(false)}/>
+            <CompleteModal modalVisible={isCompleteModalVisible} completeModal={completeModal} setModalVisible={()=>setCompleteModalVisible(false)}/>
         </ThemedMainView>
     )
 }

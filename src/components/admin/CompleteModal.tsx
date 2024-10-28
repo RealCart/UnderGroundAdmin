@@ -6,12 +6,14 @@ import GradientButton from './GradientButton'
 
 interface CompleteModalProps {
     modalVisible: boolean,
+    completeModal: () => void,
     setModalVisible: (visible: Boolean) => void,
 }
 
-const CompleteModal:React.FC<CompleteModalProps> = ({modalVisible, setModalVisible}) => {
+const CompleteModal:React.FC<CompleteModalProps> = ({modalVisible, completeModal, setModalVisible}) => {
     const textColor = useThemeColor({ light: '#000000', dark: '#FFFFFF' }, 'text');
     const deleteGradient = () => {
+        completeModal
         setModalVisible(false);
     }
     return (

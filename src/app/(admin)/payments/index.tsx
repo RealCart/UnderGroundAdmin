@@ -19,6 +19,10 @@ const ScheduleScreen = () => {
     router.push({ pathname: `/payments/addPayment`, params: {} });
   }
 
+  const cancelModal = () => {
+    
+  }
+
   return (
     <ThemedMainView>
       <PageHeader title='Платежи'/>
@@ -45,7 +49,7 @@ const ScheduleScreen = () => {
           )}
         />
         <GradientButton title="+ Добавить платеж" toDo={addWorkOut} />
-        <CancelModel modalVisible={isCancelModalVisible} setModalVisible={()=>setCancelModalVisible(false)}/>
+        <CancelModel modalVisible={isCancelModalVisible} cancelGradient={cancelModal} setModalVisible={()=>setCancelModalVisible(false)}/>
       </View>
     </ThemedMainView>
   );

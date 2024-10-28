@@ -4,20 +4,25 @@ import { InputSearch } from '@/src/components/admin/InputSearch'
 import { FROZEN } from '@/src/screens/data/data'
 import { useThemeColor } from '@/src/hooks/useThemeColor'
 import { useRouter } from 'expo-router'
-import React from 'react'
+import React, {useState} from 'react'
 import ThemedMainView from '@/src/components/themedComponents/ThemedMainView'
 import GradientButton from '@/src/components/admin/GradientButton'
+import CancelModel from '@/src/components/admin/CacncelModel'
 
 const FrozenScreen = () => {
+    const [isCancelModalVisible, setCancelModalVisible] = useState(false);
     const backgroundColor = useThemeColor({ light: '#F0F0F0', dark: '#1F1F1F' }, 'background');
     const textColor = useThemeColor({ light: '#000000', dark: '#FFFFFF' }, 'text');
     const router = useRouter();
     const addFrozen = () => {
         router.push({ pathname: `/frozen/addFrozen`});
     }
+    const cancelModal = () => {
+
+    }
     return (
         <ThemedMainView style={{paddingHorizontal:12}}>
-            <PageHeader title='Сторис советы'/>
+            <PageHeader title='Заявки на заморозку'/>
             <View>
                 <View style={{marginBottom:10}}>
                     <InputSearch/>
@@ -57,11 +62,11 @@ const FrozenScreen = () => {
                                 </View>
                               ) : (
                                 <View style={{flexDirection:'row'}}>
-                                  <TouchableOpacity style={styles.btn}>
-                                    <Text style={styles.btnText} onPress={() => router.push({ pathname:'/frozen/[id]', params: { id: item.id }})}>Просмотреть</Text>
+                                  <TouchableOpacity style={styles.btn} onPress={() => router.push({ pathname:'/frozen/[id]', params: { id: item.id }})}>
+                                    <Text style={styles.btnText}>Просмотреть</Text>
                                   </TouchableOpacity>
-                                  <TouchableOpacity style={styles.btn}>
-                                    <Text style={styles.btnText}>Отменить</Text>
+                                  <TouchableOpacity style={styles.btn} onPress={() => setCancelModalVisible(true)}>
+                                    <Text style={styles.btnText} >Отменить</Text>
                                   </TouchableOpacity>
                                 </View>
                               )}
@@ -71,6 +76,7 @@ const FrozenScreen = () => {
                 />
                 <GradientButton title="+ Добавить заморозку" toDo={addFrozen} />
             </View>
+            <CancelModel modalVisible={isCancelModalVisible} cancelGradient={cancelModal} setModalVisible={() => setCancelModalVisible(false)}/>
         </ThemedMainView>
     )
 }

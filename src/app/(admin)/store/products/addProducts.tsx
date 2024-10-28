@@ -14,7 +14,6 @@ import DynamicInputForm from '@/src/components/admin/DynamicInputForm';
 
 function EditStoreProducts() {
     const backgroundColor = useThemeColor({ light: '#FFFFFF', dark: '#181818' }, 'background'); 
-
     const [snackbarVisible, setSnackbarVisible] = useState(false);
     const handleCloseSnackbar = () => {
         setSnackbarVisible(false);
@@ -23,14 +22,14 @@ function EditStoreProducts() {
     return (
         <Formik 
             initialValues={{
-                media: '',
+                media: [],
                 title: '',
                 price: '',
                 discountPrice: '',
                 count: '',
                 color: '',
                 size: '',
-                character: [''],  
+                character: [],  
                 desc: '',
             }}
             validationSchema={StoreProductsValidation}
@@ -45,7 +44,11 @@ function EditStoreProducts() {
                 <PageHeader title='Добавить товар'/>
                 <ScrollView style={[styles.container, { backgroundColor }]}>
                     <View style={styles.section}>
-                        <MediaInput title='Медиа' placeholder='' value={values.media} onChangeText={handleChange('media')} editable={false}/>
+                        <MediaInput 
+                            title='Медиа' 
+                            value={values.media} 
+                            onImageSelect={(uris: string[]) => setFieldValue('media', uris)} 
+                        />
                         {touched.media && errors.media && <Text style={styles.error}>{errors.media}</Text>}
                     </View>
                     <View style={styles.section}>

@@ -14,6 +14,7 @@ interface workoutInfo {
     typeOfTrainig:string,
     coach:string,
     amountOfTime:string,
+    branch: string,
 }
   
 interface Coach {
@@ -50,6 +51,7 @@ const CoachWorkoutForm:React.FC<{coach: Coach}> = ({coach}) => {
                         typeOfTrainig={item.typeOfTrainig} 
                         coach={item.coach} 
                         amountOfTime={item.amountOfTime} 
+                        branch={item.branch}
                         onEditPress={() => openEditModal(item)} 
                         setCancelModalVisible={setCancelModalVisible}/>
                 )}
@@ -58,6 +60,7 @@ const CoachWorkoutForm:React.FC<{coach: Coach}> = ({coach}) => {
             <CoachEditWorkOutModel 
                 typeOfTraining={selectedWorkout?.typeOfTrainig || ''}
                 coach={selectedWorkout?.coach || ''}
+                branch={selectedWorkout?.branch || ''}
                 data={selectedWorkout?.date || ''}
                 time={selectedWorkout?.time || ''}
                 modalVisible={isEditWorkOutModalVisible}

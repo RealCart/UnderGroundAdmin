@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useThemeColor } from '@/src/hooks/useThemeColor';
 import React from 'react';
+import { scale } from 'react-native-size-matters';
 
 interface InfoListBtnProps {
     name?: string;
@@ -13,6 +14,7 @@ interface InfoListBtnProps {
     title?: string;
     coach?: string;
     payedBy?: string;
+    branch?:string,
     amountOfTime?: string;
     onEditPress: () => void;
     setCancelModalVisible: (visible: boolean) => void;
@@ -29,6 +31,7 @@ const InfoListBtn: React.FC<InfoListBtnProps> = ({
     coach,
     amountOfTime,
     payedBy,
+    branch,
     price,
     onEditPress,
     setCancelModalVisible,
@@ -73,6 +76,11 @@ const InfoListBtn: React.FC<InfoListBtnProps> = ({
                                     {coach} {payedBy}
                                 </Text>
                                 <Text style={[styles.text, { color: textColor }]}>{amountOfTime}</Text>
+                            </View>
+                        ) : null}
+                        {branch ? (
+                            <View style={{marginTop:scale(5)}}>
+                                <Text style={[styles.text, { color: textColor }]}>{branch}</Text>
                             </View>
                         ) : null}
                     </View>

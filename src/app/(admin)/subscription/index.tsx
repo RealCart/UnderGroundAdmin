@@ -19,6 +19,10 @@ const SubscriptionScreen = () => {
     router.push({ pathname: `/subscription/addSubscription`, params: {} });
   }
 
+  const deleteModal = () => {
+
+  }
+
   return (
     <ThemedMainView>
       <PageHeader title='Абонементы'/>
@@ -34,7 +38,6 @@ const SubscriptionScreen = () => {
               Id={item.id}
               title={item.title}
               date={item.price}
-              typeOfNotification={item.type}
               typeOfTrainig={`${item.term} месяц`}
               coach={`${item.countOfTraining} тренировок`}
               branch={item.include}
@@ -45,7 +48,7 @@ const SubscriptionScreen = () => {
           />
         <GradientButton title="+ Добавить абонемент" toDo={addSubscription} />
       </View>
-      <DeleteModel modalVisible={isDeleteModalVisible} setModalVisible={()=>setDeleteModalVisible(false)}/>
+      <DeleteModel modalVisible={isDeleteModalVisible} deleteGradient={deleteModal} setModalVisible={()=>setDeleteModalVisible(false)}/>
     </ThemedMainView>
   );
 };

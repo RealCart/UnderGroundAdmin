@@ -15,6 +15,10 @@ const StoriesScreen = () => {
     const addAdvice = () => {
         router.push({ pathname: `/stories/addStories`, params: {} });
     }
+
+    const deleteModal = () => {
+        
+    }
     return (
         <ThemedMainView style={{paddingHorizontal:12}}>
             <PageHeader title='Сторис советы'/>
@@ -39,7 +43,7 @@ const StoriesScreen = () => {
                     )}
                 />
                 <GradientButton title="+ Добавить совет" toDo={addAdvice} />
-                <DeleteModel modalVisible={isDeleteModalVisible} setModalVisible={()=>setDeleteModalVisible(false)}/>
+                <DeleteModel  modalVisible={isDeleteModalVisible} deleteGradient={deleteModal} setModalVisible={()=>setDeleteModalVisible(false)}/>
             </View>
         </ThemedMainView>
     )

@@ -21,7 +21,7 @@ interface StoriesInfo {
     dataStart:string,
     status:string,
     desc:string,
-    media:any,
+    media:string[],
 }
 
 function EditStories() {
@@ -34,9 +34,8 @@ function EditStories() {
 
     const [title, setTitle] = useState('');
     const [dataStart, setDataStart] = useState('');
-    const [status, setStatus] = useState('');
     const [desc, setDesc] = useState('');
-    const [media, setMedia] = useState('');
+    const [media, setMedia] = useState(['']);
 
     const [snackbarVisible, setSnackbarVisible] = useState(false);
   
@@ -52,7 +51,6 @@ function EditStories() {
                     setStories(fetchStories);
                     setTitle(fetchStories.title);
                     setDataStart(fetchStories.dataStart);
-                    setStatus(fetchStories.status);
                     setDesc(fetchStories.desc);
                     setMedia(fetchStories.media);
                 } else {
@@ -82,9 +80,8 @@ function EditStories() {
         initialValues={{
             title: title,
             data: dataStart,
-            status: status,
             desc: desc,
-            media: media
+            media: media,
           }}
           validationSchema={StoriesInfoValidation}
           onSubmit={(values) => {
@@ -93,7 +90,7 @@ function EditStories() {
             setSnackbarVisible(true);
           }}
         >
-            {({ handleChange, handleSubmit, values, errors, touched}) => (
+            {({ handleChange, handleSubmit, setFieldValue, values, errors, touched}) => (
                 <ThemedMainView>
                 <PageHeader title='Сторис советы'/>
                     <ScrollView style={[styles.container, { backgroundColor }]}>
@@ -106,7 +103,11 @@ function EditStories() {
                             {touched.desc && errors.desc && <Text style={styles.error}>{errors.desc}</Text>}
                         </View>
                         <View style={styles.section}>
-                            <MediaInput title='Медиа' placeholder='Прикрепите файлы' editable={false} value={values.media} onChangeText={handleChange('media')}/>
+                            <MediaInput 
+                                title='Медиа' 
+                                value={values.media} 
+                                onImageSelect={(uris: string[]) => setFieldValue('media', uris)}
+                            />
                             {touched.media && errors.media && <Text style={styles.error}>{errors.media}</Text>}
                         </View>
                         <View style={styles.section}>
