@@ -6,19 +6,21 @@ import { Formik } from 'formik';
 import { SubscriptionInfoValidation } from '@/src/constants/Validations';
 import { getSubscriptionById } from '@/src/api/Api';
 import { PageHeader } from '@/src/components/PageHeader';
-import { OPTIONSTYPE } from '@/src/screens/data/data';
+import { OPTIONSTYPE, SPECIALIZED_OPTIONS, TYPEOFSTATUS } from '@/src/screens/data/data';
 import Snackbar from '@/src/components/admin/SnackBar';
 import ThemedMainView from '@/src/components/themedComponents/ThemedMainView';
 import InfoFormInput from '@/src/components/admin/InfoFormInput';
 import Dropdown from '@/src/components/admin/Dropdown';
 import GradientButton from '@/src/components/admin/GradientButton';
+import MultiSelectDropdownList from '@/src/components/admin/MultiDropdown';
 interface SubscriptionInfo {
     id: number,
     title:string,
     price:string,
+    typeOf:string,
     term:string,
     countOfTraining:string, 
-    include:string,
+    include:string[],
 }
 
 function EditSubscription() {
@@ -31,9 +33,10 @@ function EditSubscription() {
 
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
+    const [typeOf, setTypeOf] = useState('');
     const [term, setTerm] = useState('');
     const [countOfTraining, setCountOfTraining] = useState('');
-    const [include, setInclude] = useState('');
+    const [include, setInclude] = useState(['']);
 
     const [snackbarVisible, setSnackbarVisible] = useState(false);
     const handleCloseSnackbar = () => {
@@ -49,6 +52,7 @@ function EditSubscription() {
                     setSubscription(fetchedSubscription); 
                     setTitle(fetchedSubscription.title);
                     setPrice(fetchedSubscription.price);
+                    setTypeOf(fetchedSubscription.typeOf);
                     setTerm(fetchedSubscription.term);
                     setCountOfTraining(fetchedSubscription.countOfTraining);
                     setInclude(fetchedSubscription.include);
@@ -83,6 +87,7 @@ function EditSubscription() {
         initialValues={{
             title: title,
             price: price,
+            typeOf: typeOf,
             term:term,
             countOfTraining: countOfTraining,
             include: include,
@@ -94,7 +99,7 @@ function EditSubscription() {
             setSnackbarVisible(true);
           }}
         >
-            {({ handleChange, handleSubmit, values, errors, touched}) => (
+            {({ handleChange, handleSubmit, setFieldValue, values, errors, touched}) => (
                 <ThemedMainView>
                 <PageHeader title='Добавить абонемент'/>
                 <ScrollView style={[styles.container, { backgroundColor }]}>
@@ -112,12 +117,23 @@ function EditSubscription() {
                         {touched.countOfTraining && errors.countOfTraining && <Text style={styles.error}>{errors.countOfTraining}</Text>}
                     </View>
                     <View style={styles.section}>
+                        <Text style={styles.ttl}>Тип</Text>
+                        <Dropdown options={SPECIALIZED_OPTIONS} selectedOption={values.typeOf} onChange={handleChange('typeOf')}/>
+                        {touched.typeOf && errors.typeOf && <Text style={styles.error}>{errors.typeOf}</Text>}
+                    </View>
+                    <View>
                         <Text style={styles.ttl}>Дополнительно</Text>
-                        <Dropdown options={OPTIONSTYPE} selectedOption={values.term} onChange={handleChange('include')}/>
-                        {touched.include && errors.include && <Text style={styles.error}>{errors.include}</Text>}
+                        <MultiSelectDropdownList
+                            options={SPECIALIZED_OPTIONS}
+                            selectedOption={values.include}
+                            onChange={(selectedValues) => setFieldValue('include', selectedValues)}
+                        />
+                        {touched.include && errors.include && (
+                            <Text style={styles.error}>{String(errors.include)}</Text>
+                        )}
                     </View>
                     <View style={styles.section}>
-                        <InfoFormInput title='Стоимость' placeholder='Заполните стоимость абонимента' value={values.price} onChangeText={handleChange('price')}/>
+                        <InfoFormInput title='Стоимость' placeholder='Заполните стоимость абонимента' keyboardType='numeric' value={values.price} onChangeText={handleChange('price')}/>
                         {touched.price && errors.price && <Text style={styles.error}>{errors.price}</Text>}
                     </View>
                     <GradientButton title='Сохранить' toDo={handleSubmit}/>

@@ -167,8 +167,10 @@ export const NotificationInfoValidation = Yup.object().shape({
         .required('Поле получателя обязательна'),
     method: Yup.string()
         .required('Поле метода отправки обязательна'),
-    data: Yup.string()
-        .required('Поле даты обязательна к заполнению'),
+    dateTime: Yup.object().shape({
+        date: Yup.string().required('Поле даты обязателен к выбору'),
+        time: Yup.string().required('Поле времени обязателен к выбору'),
+    }),
     status: Yup.string()
         .required('Поле статуса обязателен к выбору'),
 })
@@ -186,8 +188,10 @@ export const AddNotificationInfoValidation = Yup.object().shape({
         .required('Поле фильтра обязательна'),
     method: Yup.string()
         .required('Поле метода отправки обязательна'),
-    time: Yup.string()
-        .required('Поле времени отправки обязательна'),
+    dateTime: Yup.object().shape({
+        date: Yup.string().required('Дата обязательна'),
+        time: Yup.string().required('Время обязательна'),
+    }),
 })
 
 const daysOfWeek = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
@@ -269,11 +273,13 @@ export const SubscriptionInfoValidation = Yup.object().shape({
     price: Yup.number()
         .required('Поле cтоимости обязателен к заполнению')
         .positive('Стоимость должна быть положительным числом'),
+    typeOf: Yup.string()
+        .required('Поле типа обязателен к выбору'),
     term: Yup.string()
         .required('Поле продолжительности обязателен к заполнению'),
     countOfTraining: Yup.string()
         .required('Поле количество тренировок обязателен к заполнению'),
-    include: Yup.string()
+    include: Yup.array()
         .required('Поле дополнительно обязателен к заполнению'),
 })
 

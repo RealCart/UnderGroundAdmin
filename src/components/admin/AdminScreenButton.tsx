@@ -3,7 +3,7 @@ import { useRouter } from 'expo-router';
 import { useThemeColor } from '@/src/hooks/useThemeColor';
 import React from 'react';
 
-const AdminScreenButton: React.FC<{ title: string, icon: React.JSX.Element, route: string }> = ({ title, icon, route }) => {
+const AdminScreenButton: React.FC<{ title?: string, size?: '48%' | '100%',  icon: React.JSX.Element, route: string }> = ({ title, size, icon, route }) => {
     const backgroundColor = useThemeColor({ light: '#F0F0F0', dark: '#252525' }, 'background');
     const iconColor = useThemeColor({ light: 'black', dark: 'white' }, 'icon');
     const textColor = useThemeColor({ light: '#000000', dark: '#FFFFFF' }, 'text');
@@ -11,7 +11,7 @@ const AdminScreenButton: React.FC<{ title: string, icon: React.JSX.Element, rout
 
     return (
         <TouchableOpacity
-            style={[styles.adminButton, { backgroundColor }]}
+            style={[styles.adminButton, { backgroundColor, width: size }]}
             onPress={() => {
                 router.push({
                     pathname: route,
@@ -21,7 +21,9 @@ const AdminScreenButton: React.FC<{ title: string, icon: React.JSX.Element, rout
         >
             <View style={{ alignItems: 'center' }}>
                 {React.cloneElement(icon, { color: iconColor })}
-                <Text style={[styles.title, { color: textColor }]}>{title}</Text>
+                {title && (
+                    <Text style={[styles.title, { color: textColor }]}>{title}</Text>
+                )}
             </View>
         </TouchableOpacity>
     );
@@ -31,7 +33,6 @@ export default AdminScreenButton;
 
 const styles = StyleSheet.create({
     adminButton: {
-        width: '48%',
         padding: 20,
         marginVertical: 5,
         borderRadius: 8,

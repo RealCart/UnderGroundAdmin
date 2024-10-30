@@ -3,7 +3,7 @@ import { ScrollView, View, Text, StyleSheet, Alert } from 'react-native';
 import { Formik } from 'formik';
 import { SubscriptionInfoValidation } from '@/src/constants/Validations';
 import { PageHeader } from '@/src/components/PageHeader';
-import { OPTIONSTYPE } from '@/src/screens/data/data';
+import { OPTIONSTYPE, SPECIALIZED_OPTIONS } from '@/src/screens/data/data';
 import Snackbar from '@/src/components/admin/SnackBar';
 import ThemedMainView from '@/src/components/themedComponents/ThemedMainView';
 import InfoFormInput from '@/src/components/admin/InfoFormInput';
@@ -19,6 +19,7 @@ function addSubscription() {
         initialValues={{
             title: '',
             price: '',
+            typeOf: '',
             term:'',
             countOfTraining:'',
             include: '',
@@ -47,12 +48,17 @@ function addSubscription() {
                         {touched.countOfTraining && errors.countOfTraining && <Text style={styles.error}>{errors.countOfTraining}</Text>}
                     </View>
                     <View style={styles.section}>
+                        <Text style={styles.ttl}>Тип</Text>
+                        <Dropdown options={SPECIALIZED_OPTIONS} selectedOption={values.typeOf} onChange={handleChange('typeOf')}/>
+                        {touched.typeOf && errors.typeOf && <Text style={styles.error}>{errors.typeOf}</Text>}
+                    </View>
+                    <View style={styles.section}>
                         <Text style={styles.ttl}>Дополнительно</Text>
                         <Dropdown options={OPTIONSTYPE} selectedOption={values.term} placeholder='Выберите какие занятия' onChange={handleChange('include')}/>
                         {touched.include && errors.include && <Text style={styles.error}>{errors.include}</Text>}
                     </View>
                     <View style={styles.section}>
-                        <InfoFormInput title='Стоимость' placeholder='Заполните стоимость абонимента' value={values.price} onChangeText={handleChange('price')}/>
+                        <InfoFormInput title='Стоимость' placeholder='Заполните стоимость абонимента' keyboardType='numeric' value={values.price} onChangeText={handleChange('price')}/>
                         {touched.price && errors.price && <Text style={styles.error}>{errors.price}</Text>}
                     </View>
                     <GradientButton title='Сохранить' toDo={handleSubmit}/>

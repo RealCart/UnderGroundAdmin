@@ -38,9 +38,10 @@ const SubscriptionScreen = () => {
               Id={item.id}
               title={item.title}
               date={item.price}
+              typeOfNotification={item.typeOf}
               typeOfTrainig={`${item.term} месяц`}
               coach={`${item.countOfTraining} тренировок`}
-              branch={item.include}
+              include={item.include}
               deleteBtn={true}
               onDeletePress={() => setDeleteModalVisible(true)}
             />

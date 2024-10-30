@@ -16,6 +16,7 @@ interface ListBtnProps {
     payedBy?: string;
     amountOfTime?: string;
     branch?: string;
+    include?:string[];
     recorded?: string;
     countOfCoach?: string;
     countOfUser?: string;
@@ -40,6 +41,7 @@ const ListBtn: React.FC<ListBtnProps> = ({
     typeOfTrainig, 
     coach, 
     branch, 
+    include,
     recorded, 
     typeOfNotification,
     countOfCoach,
@@ -113,9 +115,9 @@ const ListBtn: React.FC<ListBtnProps> = ({
                                 <Text style={[styles.text, { color: textColor }]}>{amountOfTime}</Text>
                             </View>
                         ) : null}
-                        {branch ? (
+                        {branch || include ? (
                             <View style={styles.branchRow}>
-                                <Text style={[styles.text, { color: textColor }]}>{branch}</Text>
+                                <Text style={[styles.text, { color: textColor }]}>{branch} {include?.join(', ')}</Text>
                                 <Text style={[styles.text, { color: textColor }]}>{recorded}</Text>
                             </View>
                         ) : null}

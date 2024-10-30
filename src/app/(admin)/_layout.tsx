@@ -5,6 +5,7 @@ export default function AdminLayout() {
   return (
       <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="qrScanner" options={{ headerShown: false }} />
           <Stack.Screen name="users" options={{ headerShown: false }} />
           <Stack.Screen name="schedule" options={{ headerShown: false }} />
           <Stack.Screen name="coachs" options={{ headerShown: false }} />

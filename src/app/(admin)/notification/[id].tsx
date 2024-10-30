@@ -3,11 +3,9 @@ import { useState, useEffect } from 'react';
 import { useThemeColor } from '@/src/hooks/useThemeColor';
 import { ScrollView, View, Text, StyleSheet, ActivityIndicator, Alert } from 'react-native'; 
 import { getNotificationById } from '@/src/api/Api';
-import { TITLENOTIFICATIONS } from '@/src/screens/data/data';
-import { TOWHONOTIFICATIONS } from '@/src/screens/data/data';
-import { METHODNOTIFICATIONS } from '@/src/screens/data/data';
-import { STATUSNOTIFICATIONS } from '@/src/screens/data/data';
+import { TITLENOTIFICATIONS, TOWHONOTIFICATIONS, METHODNOTIFICATIONS, STATUSNOTIFICATIONS } from '@/src/screens/data/data';
 import { NotificationInfoValidation } from '@/src/constants/Validations';
+import DateTimePickerModal from '@/src/components/admin/DateTimePicker';
 import { PageHeader } from '@/src/components/PageHeader';
 import { Formik } from 'formik';
 import ThemedMainView from '@/src/components/themedComponents/ThemedMainView';
@@ -15,11 +13,26 @@ import DatePickerModal from '@/src/components/admin/datepicker';
 import Dropdown from '@/src/components/admin/Dropdown';
 import GradientButton from '@/src/components/admin/GradientButton';
 
+const formatDate = (date: Date) => {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); 
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+  };
+  
+  const formatTime = (date: Date): string => {
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
 
 interface NotificationInfo {
     id: number; 
     title:string; 
-    date:string,
+    dateTime: {
+        date: string,
+        time: string,
+    },
     typeOfNotification: string; 
     statusOfNotification: string; 
     method: string; 
@@ -34,12 +47,6 @@ function EditNotification() {
     const [notification, setNotification] = useState<NotificationInfo | null>(null);
     const [loading, setLoading] = useState(true);
 
-    const [title, setTitle] = useState('');
-    const [date, setDate] = useState('');
-    const [statusOfNotification, setStatusOfNotification] = useState('');
-    const [method, setMethod] = useState('');
-    const [toWho, setToWho] = useState('');
-
     useEffect(() => {
         const fetchNotification = async () => {
             setLoading(true); 
@@ -47,16 +54,11 @@ function EditNotification() {
                 const fetchNotification = await getNotificationById(notificationId);
                 if (fetchNotification) {
                     setNotification(fetchNotification);
-                    setTitle(fetchNotification.title);
-                    setDate(fetchNotification.date);
-                    setStatusOfNotification(fetchNotification.statusOfNotification);
-                    setMethod(fetchNotification.method);
-                    setToWho(fetchNotification.toWho);
                 } else {
                     setNotification(null);
                 }
             } catch (error) {
-                console.error('Error fetching schedule:', error);
+                console.error('Error fetching notification page data:', error);
                 setNotification(null); 
             } finally {
                 setLoading(false); 
@@ -77,11 +79,14 @@ function EditNotification() {
     return (
         <Formik 
         initialValues={{
-            typeOf: title,
-            toWho: toWho,
-            method: method,
-            data: date,
-            status: statusOfNotification,
+            typeOf: notification.title || '',
+            toWho: notification.toWho || '',
+            method: notification.method || '',
+            dateTime: notification.dateTime || {
+                date: formatDate(new Date()),
+                time: formatTime(new Date())
+            },
+            status: notification.statusOfNotification || '',
           }}
           validationSchema={NotificationInfoValidation}
           onSubmit={(values) => {
@@ -89,7 +94,7 @@ function EditNotification() {
             console.log(values)
           }}
         >
-            {({ handleChange, handleSubmit, values, errors, touched}) => (
+            {({ handleChange, handleSubmit, setFieldValue, values, errors, touched}) => (
                 <ThemedMainView>
                 <PageHeader title='Уведомления'/>
                 <ScrollView style={[styles.container, { backgroundColor }]}>
@@ -110,8 +115,16 @@ function EditNotification() {
                     </View>
                     <View style={styles.section}>
                         <Text style={styles.ttl}>Дата и время отправки</Text>
-                        <DatePickerModal initialDate={values.data} onDateChange={handleChange('data')}/>
-                        {touched.data && errors.data && <Text style={styles.error}>{errors.data}</Text>}
+                        <DateTimePickerModal
+                            initialDate={values.dateTime}
+                            onDateChange={(dateTime) => setFieldValue('dateTime', dateTime)}
+                        />
+                        {touched.dateTime?.date && errors.dateTime?.date && (
+                        <Text style={styles.error}>{errors.dateTime.date}</Text>
+                        )}
+                        {touched.dateTime?.time && errors.dateTime?.time && (
+                        <Text style={styles.error}>{errors.dateTime.time}</Text>
+                        )}
                     </View>
                     <View style={styles.section}>
                         <Text style={styles.ttl}>Статус</Text>

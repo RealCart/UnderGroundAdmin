@@ -1,5 +1,5 @@
-import { Avatar, Users, Schedule, Coachs, Payments, Notifications, Branches, Gamification, StoriesIcon, FrozenUsers } from '@/src/components/icons/Icon';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { Avatar, Qr, Users, Schedule, Coachs, Payments, Notifications, Branches, Gamification, StoriesIcon, FrozenUsers } from '@/src/components/icons/Icon';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useThemeColor } from '@/src/hooks/useThemeColor';
 import React, { useEffect, useState } from 'react';
 import SplashScreen from '@/src/components/admin/SplashScreen';
@@ -25,21 +25,22 @@ export default function AdminScreen() {
           <Text style={[styles.username, { color: textColor }]}>Алина М.</Text>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
+            <AdminScreenButton icon={<Qr />} route="./qrScanner" size='100%'/>
             <View style={styles.buttonContainer}>
-              <AdminScreenButton title="Пользователи" icon={<Users />} route="./users" />
-              <AdminScreenButton title="Расписание" icon={<Schedule />} route="./schedule" />
-              <AdminScreenButton title="Тренеры" icon={<Coachs />} route="./coachs" />
-              <AdminScreenButton title="Платежи" icon={<Payments />} route="./payments" />
-              <AdminScreenButton title="Уведомления" icon={<Notifications />} route="./notification" />
-              <AdminScreenButton title="Филиалы" icon={<Branches />} route="./branches" />
-              <AdminScreenButton title="Геймификация" icon={<Gamification />} route="./gamification" />
-              <AdminScreenButton title="Геймификация" icon={<Gamification />} route="./(authorization)" />
-              <AdminScreenButton title="Сторис" icon={<StoriesIcon/>} route="./stories" />
-              <AdminScreenButton title="Заморозка" icon={<FrozenUsers width={40} height={40}/>} route="./frozen" />
-              <AdminScreenButton title="Абонементы" icon={<FrozenUsers width={40} height={40}/>} route="./subscription" />
-              <AdminScreenButton title="Магазин" icon={<FrozenUsers width={40} height={40}/>} route="./store" />
-              <AdminScreenButton title="Занятия" icon={<FrozenUsers width={40} height={40}/>} route="./classes" />
-              <AdminScreenButton title="Баннер" icon={<FrozenUsers width={40} height={40}/>} route="./banner" />
+              <AdminScreenButton title="Пользователи" icon={<Users />} route="./users" size='48%' />
+              <AdminScreenButton title="Расписание" icon={<Schedule />} route="./schedule" size='48%' />
+              <AdminScreenButton title="Тренеры" icon={<Coachs />} route="./coachs" size='48%' />
+              <AdminScreenButton title="Платежи" icon={<Payments />} route="./payments" size='48%' />
+              <AdminScreenButton title="Уведомления" icon={<Notifications />} route="./notification" size='48%' />
+              <AdminScreenButton title="Филиалы" icon={<Branches />} route="./branches" size='48%' />
+              <AdminScreenButton title="Геймификация" icon={<Gamification />} route="./gamification" size='48%' />
+              <AdminScreenButton title="Геймификация" icon={<Gamification />} route="./(authorization)" size='48%' />
+              <AdminScreenButton title="Сторис" icon={<StoriesIcon/>} route="./stories" size='48%' />
+              <AdminScreenButton title="Заморозка" icon={<FrozenUsers width={40} height={40}/>} route="./frozen" size='48%' />
+              <AdminScreenButton title="Абонементы" icon={<FrozenUsers width={40} height={40}/>} route="./subscription" size='48%' />
+              <AdminScreenButton title="Магазин" icon={<FrozenUsers width={40} height={40}/>} route="./store" size='48%' />
+              <AdminScreenButton title="Занятия" icon={<FrozenUsers width={40} height={40}/>} route="./classes" size='48%' />
+              <AdminScreenButton title="Баннер" icon={<FrozenUsers width={40} height={40}/>} route="./banner" size='48%' />
             </View>
         </ScrollView>
       </View>
@@ -67,4 +68,3 @@ const styles = StyleSheet.create({
     justifyContent:'space-between'
   },
 });
-

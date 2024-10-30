@@ -136,13 +136,13 @@ export const TYPEOFSTATUS = [
 ]
 
 export const NOTIFICATIONS = [
-    {id:0, title:'Напоминание о тренировке', date:'01.09.2024', typeOfNotification:'Массовое',
+    {id:0, title:'Напоминание о тренировке', dateTime: {date:'01.01.2001', time:'06:45'}, typeOfNotification:'Массовое',
      statusOfNotification:'Отправлено', method:'Push', toWho:'Все клиенты'   
     },
-    {id:1, title:'Продление абонемента', date:'01.09.2024', typeOfNotification:'Индивидуальное',
+    {id:1, title:'Продление абонемента', dateTime: {date:'01.01.2001', time:'06:45'}, typeOfNotification:'Индивидуальное',
      statusOfNotification:'Запланировано', method:'Email', toWho:'Все клиенты'   
     },
-    {id:2, title:'Промо-акция', date:'01.09.2024', typeOfNotification:'Массовое',
+    {id:2, title:'Промо-акция', dateTime: {date:'01.01.2001', time:'06:45'}, typeOfNotification:'Массовое',
      statusOfNotification:'Отменено', method:'SMS', toWho:'Иван Иванов'   
     },
 ]
@@ -1467,16 +1467,16 @@ export const FROZEN = [
 
 export const SUBSCRIPTION = [
     {
-        id:0, title:'Абонемент 1 месяц', price:'15000',
-        term:'1', countOfTraining:'12', include:'Сауна, тренер, бассейн'
+        id:0, title:'Абонемент 1 месяц', price:'15000', typeOf:'Персональный',
+        term:'1', countOfTraining:'12', include:['Сауна', 'Тренер', 'Бассейн']
     },
     {
-        id:1, title:'Абонемент 3 месяца', price:'60000', 
-        term:'3', countOfTraining:'36', include:'Сауна, тренер, бассейн'
+        id:1, title:'Абонемент 3 месяца', price:'60000', typeOf:'Групповой',
+        term:'3', countOfTraining:'36', include:['Сауна', 'Тренер', 'Бассейн']
     },
     {
-        id:2, title:'Абонемент 1 месяц', price:'15000',
-        term:'1', countOfTraining:'12', include:'Сауна, тренер, бассейн'
+        id:2, title:'Абонемент 1 месяц', price:'15000', typeOf:'Персональный',
+        term:'1', countOfTraining:'12', include:['Сауна', 'Тренер', 'Бассейн']
     },
 ]
 
